@@ -33,22 +33,72 @@
         }
         text{
             font-family: sans-serif;
-            font-size: 1em;
+            font-size: 0.75em;
+        }
+        .Hours {
+            width: 100%;
+        }
+        .Category {
+            width: 100%;
+        }
+        .scrollableDiv {
+            overflow-y: scroll;
+            height: 500;
+        }
+        .halfWidthtd {
+            width: 48%;
+        }
+        .tdHorizontalSpacer {
+            width: 4%;
+        }
+        .charttr {
+            height: 500;
+        }
+        table {
+            width: 100%;
         }
 
     </style>
     <div class="container">
     <body>
+        <h1>Crime in Seattle 2008 - 2017</h1>
+        <p>The following charts show the frequency and category of crimes that occur in Seattle.</p>
         <script>Hours()</script>
         <script>Categories()</script>
         <script>setDuration(300)</script>
+
+        <table>
+            <tr>
+                <td class="halfWidthtd">
+                        <h2>Hour Crime Occurred</h2>
+                </td>
+                <td class="tdHorizontalSpacer"></td>
+                <td class="halfWidthtd">
+                        <h2>Category of Crime</h2>
+                </td>
+            </tr>
+            <tr class="charttr">
+                <td class="halfWidthtd">
+                        
+                        <svg id="Hours" class="Hours">
+                </td>
+                <td class="tdHorizontalSpacer"></td>
+                <td class="halfWidthtd">
+                        <div class="scrollableDiv">
+                                <svg id="Category" class="Category"></svg>
+                            </div>
+                </td>
+            </tr>
+            <tr>
+
+            </tr>
+        </table>
         
-        <svg id="Hours">
+        
 
         </svg>
-        <svg id="Category">
-
-            </svg>
+        
+        
                         
     </body>
 

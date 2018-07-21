@@ -2,10 +2,11 @@ var colors = ["#c42b3c", "#381f22", "#2f70d8", "#e88020", "#95a7c4", "#c1838a"];
 
 var border = "#e5dadb";
 
+
+
 var transitionDuration = 0;
 
 function setDuration(duration){
-    console.log(transitionDuration);
     transitionDuration = duration;
 }
 
@@ -16,8 +17,10 @@ function Hours(col = 0, ind = -1) {
             console.log(error);
         }
 
-        var width = 800,
-            height = 500;
+        var margin = {top: 0, right: 10, bottom: 30, left: 10}
+        , width = parseInt(d3.select("#Hours").style("width"), 10)
+        , width = (width - margin.right) - margin.left
+        , height = 500;
     
         data.forEach( function(d) {
             d.Hour = +d.Hour;
@@ -26,10 +29,12 @@ function Hours(col = 0, ind = -1) {
 
         var maxCount = d3.max(data, function(d) {return d.Count; });
 
+        var records = data.length;
+
         var canvas = d3.select("body").select("#Hours")
             .attr("width", width)
             .attr("height", height)
-            .attr("stroke", border);
+            .style("border", border);
     
         data.sort(function(x, y){
             return d3.ascending(x.Hour, y.Hour)
@@ -39,7 +44,7 @@ function Hours(col = 0, ind = -1) {
 
         text.enter().append("text").merge(text)
                 .attr("fill", "black")
-                .attr("x", function(d, i) {return i * 30;})
+                .attr("x", function(d, i) {return (i * width / (records)) + width / (2 * (records)) ;})
                 .attr("y", 485)
                 .text(function (d) {return d.Hour});
         text.exit().exit();
@@ -52,9 +57,9 @@ function Hours(col = 0, ind = -1) {
                 .on("click", hourClick)
                 .transition("HoursTransition")
                 .duration(transitionDuration)
-                .attr("width", 25)
+                .attr("width", width / (records + 3))
                 .attr("height", function (d) {return  d.Count / maxCount * (height - 100) ;})
-                .attr("x", function(d, i) {return i * 30;})
+                .attr("x", function(d, i) {return i * width / (records);})
                 .attr("y",  function(d) { return (height - 50)  - d.Count / maxCount * (height - 100); })
                 .attr("fill", function(d, i) { if (i === ind) {return colors[0]} else {return colors[col]};})
                 
@@ -146,8 +151,10 @@ function Categories(col = 2, ind = -1) {
             console.log(error);
         }
 
-        var width = 800,
-            height = 800;
+        var margin = {top: 20, right: 10, bottom: 30, left: 10}
+        , width = parseInt(d3.select("#Category").style("width"), 10)
+        , width = (width - margin.right) - margin.left
+        , height = 700;
     
         data.forEach( function(d) {
             d.Category = d.Category;
@@ -199,8 +206,10 @@ function HoursForCategory(categoryFilter, col = 0) {
         }
         console.log(transitionDuration);
 
-        var width = 800,
-            height = 500;
+        var margin = {top: 20, right: 10, bottom: 30, left: 10}
+        , width = parseInt(d3.select("#Hours").style("width"), 10)
+        , width = width - margin.right - margin.left
+        , height = 500;
         
     
         data.forEach( function(d) {
@@ -215,6 +224,8 @@ function HoursForCategory(categoryFilter, col = 0) {
 
         var maxCount = d3.max(data, function(d) {return d.Count; });
 
+        var records = data.length;
+
         var canvas = d3.select("body").select("#Hours")
             .attr("width", width)
             .attr("height", height);
@@ -228,7 +239,7 @@ function HoursForCategory(categoryFilter, col = 0) {
         text.enter().append("text").merge(text)
                 .filter(function(d) { return d.Category == categoryFilter})
                 .attr("fill", "black")
-                .attr("x", function(d, i) {return i * 30;})
+                .attr("x", function(d, i) {return (i * width / (records)) + width / (2 * (records)) ;})
                 .attr("y", 485)
                 .text(function (d) {return d.Hour});
         text.exit().exit();
@@ -239,11 +250,12 @@ function HoursForCategory(categoryFilter, col = 0) {
                 .filter(function(d) { return d.Category == categoryFilter})
                 .on("mouseover", mouseOverHour)
                 .on("mouseout", mouseOutHour)
+                .on("click", hourClick)
                 .transition("CategoryHourTransition")
                 .duration(transitionDuration)
-                .attr("width", 25)
-                 .attr("height", function (d) {return  d.Count / maxCount * (height - 100) ;})
-                .attr("x", function(d, i) {return i * 30;})
+                .attr("width", width / (records + 3))
+                .attr("height", function (d) {return  d.Count / maxCount * (height - 100) ;})
+                .attr("x", function(d, i) {return i * width / (records);})
                 .attr("y",  function(d) { return (height - 50)  - d.Count / maxCount * (height - 100); })
                 .attr("fill", colors[col]);
                 
@@ -265,8 +277,10 @@ function CategoryForHours(hourFilter, col = 2) {
             console.log(error);
         }
 
-        var width = 800,
-            height = 800;
+        var margin = {top: 20, right: 10, bottom: 30, left: 10}
+        , width = parseInt(d3.select("#Category").style("width"), 10)
+        , width = (width - margin.right) - margin.left
+        , height = 700;
     
         data.forEach( function(d) {
             d.Hour = +d.Hour;
@@ -304,10 +318,11 @@ function CategoryForHours(hourFilter, col = 2) {
         rects.enter().append("rect").merge(rects)
                 .on("mouseover", mouseOverHour)
                 .on("mouseout", mouseOutHour)
+                .on("click", categoryClick)
                 .transition("HoursForCategoryTransition")
                 .duration(transitionDuration)
                 .attr("height", 25)
-                .attr("width", function (d) {return  d.Count / maxCount * (height - 100) ;})
+                .attr("width", function (d) {return  d.Count / maxCount * (width - 100) ;})
                 .attr("y", function(d, i) {return i * 30;})
                 .attr("x",  140)
                 .attr("fill", colors[col])
