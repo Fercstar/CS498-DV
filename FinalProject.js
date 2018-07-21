@@ -1,5 +1,7 @@
 var colors = ["#c42b3c", "#381f22", "#2f70d8", "#e88020", "#95a7c4", "#c1838a"];
 
+var border = "#e5dadb";
+
 var transitionDuration = 0;
 
 function setDuration(duration){
@@ -26,7 +28,8 @@ function Hours(col = 0, ind = -1) {
 
         var canvas = d3.select("body").select("#Hours")
             .attr("width", width)
-            .attr("height", height);
+            .attr("height", height)
+            .attr("stroke", border);
     
         data.sort(function(x, y){
             return d3.ascending(x.Hour, y.Hour)
