@@ -17,7 +17,7 @@ function Hours(col = 0, ind = -1) {
             console.log(error);
         }
 
-        var margin = {top: 0, right: 10, bottom: 30, left: 10}
+        var margin = {top: 0, right: 10, bottom: 15, left: 10}
         , width = parseInt(d3.select("#Hours").style("width"), 10)
         , width = (width - margin.right) - margin.left
         , height = 500;
@@ -45,8 +45,12 @@ function Hours(col = 0, ind = -1) {
         text.enter().append("text").merge(text)
                 .attr("fill", "black")
                 .attr("x", function(d, i) {return (i * width / (records)) + width / (2 * (records)) ;})
+                .attr("width", width / (records + 3) )
                 .attr("y", 485)
-                .text(function (d) {return d.Hour});
+                .style("text-anchor", "middle")
+                .text(function (d) {return d.Hour})
+                .style("font-family", "monospace")
+                .style("font-size", "1em");
         text.exit().exit();
     
         var rects = canvas.selectAll("rect").data(data);
@@ -60,7 +64,7 @@ function Hours(col = 0, ind = -1) {
                 .attr("width", width / (records + 3))
                 .attr("height", function (d) {return  d.Count / maxCount * (height - 100) ;})
                 .attr("x", function(d, i) {return i * width / (records);})
-                .attr("y",  function(d) { return (height - 50)  - d.Count / maxCount * (height - 100); })
+                .attr("y",  function(d) { return (height - 35)  - d.Count / maxCount * (height - 100); })
                 .attr("fill", function(d, i) { if (i === ind) {return colors[0]} else {return colors[col]};})
                 
                 ;
@@ -256,7 +260,7 @@ function HoursForCategory(categoryFilter, col = 0) {
                 .attr("width", width / (records + 3))
                 .attr("height", function (d) {return  d.Count / maxCount * (height - 100) ;})
                 .attr("x", function(d, i) {return i * width / (records);})
-                .attr("y",  function(d) { return (height - 50)  - d.Count / maxCount * (height - 100); })
+                .attr("y",  function(d) { return (height - 35)  - d.Count / maxCount * (height - 100); })
                 .attr("fill", colors[col]);
                 
                 
