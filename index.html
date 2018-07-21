@@ -61,16 +61,18 @@
         rect {
             cursor: pointer;
         }
+        .slider {
+            height: 50;
+            width: 100%;
+        }
 
     </style>
     <div class="container">
     <body>
-        <h1>Crime in Seattle 2008 - 2017</h1>
+        <h1 onclick="progressBar(0.10)">Crime in Seattle 2008 - 2017</h1>
         <p>The following charts show the frequency and category of crimes that occur in Seattle.</p>
-        <script>Hours()</script>
-        <script>Categories()</script>
-        <script>setDuration(300)</script>
-
+        
+        
         <table>
             <tr>
                 <td class="halfWidthtd">
@@ -93,8 +95,14 @@
                             </div>
                 </td>
             </tr>
+        </table>
+        <table>
             <tr>
+                <td width="100%">
+                    <svg id="slider" class="slider" width = "100%">
 
+                    </svg>
+                </td>
             </tr>
         </table>
         
@@ -105,7 +113,10 @@
         
                         
     </body>
-
+    <script>Hours()</script>
+    <script>Categories()</script>
+    <script>setDuration(300)</script>
+    <script>progressBar(0.10)</script>
     
    
     </div>

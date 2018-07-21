@@ -338,3 +338,37 @@ function CategoryForHours(hourFilter, col = 2) {
 
     })
 }
+
+var currentProgress = 0.0;
+
+function progressBar(percent = 0.25){
+    var canvas = d3.select("body").select("#slider")
+
+    currentProgress = currentProgress + percent;
+
+    var margin = {top: 10, right: 10, bottom: 10, left: 10}
+        , width = parseInt(d3.select("#slider").style("width"), 10)
+        , width = (width - margin.right) - margin.left
+        , height = parseInt(d3.select("#slider").style("height"), 10)
+        , height = (height - margin.top) - margin.bottom;
+
+    var data = [width * currentProgress, width * (1 - currentProgress)]
+        , colors = ["#54e814", "#7f8c7a"];
+
+    console.log(currentProgress);
+    if (currentProgress >= 0.99){
+        data = [];
+    }
+
+    var rects = canvas.selectAll("rect").data(data);
+    rects.enter().append("rect").merge(rects)
+        .transition("progressBar")
+        .duration(1000)
+        .attr("x", function(d, i) {return width * (currentProgress) * i; })
+        .attr("width", function(d) {return d;})
+        .attr("fill", function(d, i) {return colors[i]; })
+        .attr("height", height)
+        .attr("y", height + margin.top);
+    rects.exit().transition().remove();
+
+}
