@@ -130,16 +130,20 @@ function mouseOverCategory(d, i) {
 
 function mouseOutCategory(d, i) {
   if (currentScene === lastScene) {
+      console.log("is last scene");
     if ("None" === currentCategory) {
+        console.log("None Selected")
       d3.select(this)
         .attr("fill", colors[2])
         .transition("mouseOutCategoryTransition");
     }
     if ((currentCategory != d.Category) & ("None" != currentCategory)) {
+        console.log("something Selected")
       d3.select(this)
         .attr("fill", colors[4])
         .transition("mouseOutCategoryTransition");
     }
+
   }
 }
 
@@ -399,6 +403,7 @@ function CategoryForHours(hourFilter, col = 2) {
       .attr("y", function(d, i) {
         return i * 30 + 15;
       })
+      .on("click", categoryClick)
       .attr("x", 0)
       .text(function(d) {
         return d.Category;
@@ -411,8 +416,8 @@ function CategoryForHours(hourFilter, col = 2) {
       .enter()
       .append("rect")
       .merge(rects)
-      .on("mouseover", mouseOverHour)
-      .on("mouseout", mouseOutHour)
+      .on("mouseover", mouseOverCategory)
+      .on("mouseout", mouseOutCategory)
       .on("click", categoryClick)
       .transition("HoursForCategoryTransition")
       .duration(transitionDuration)
