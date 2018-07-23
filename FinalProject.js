@@ -466,7 +466,8 @@ function progressBar(percent = currentScene / lastScene) {
     height = height - margin.top - margin.bottom;
 
   var data = [width * percent, width * (1 - percent)],
-    colors = ["#54e814", "#7f8c7a"];
+    // colors = ["#54e814", "#7f8c7a"];
+    colors = ["#2d1f1f", "#a09898"];
 
   var rects = canvas.selectAll("rect").data(data);
   rects
