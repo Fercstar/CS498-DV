@@ -633,6 +633,9 @@ function scenePicker(scene = 0) {
 
 function sceneZero() {
   currentScene = 0;
+  d3.select("#leftSideBar").html("")
+    .attr("class", "sideBarNoHover")
+
   d3.selectAll(".halfWidthtd").attr("width", "0");
   d3.selectAll(".tdHorizontalSpacer").attr("width", "0");
   d3.selectAll(".chart1tdClass").attr("width", "90%");
@@ -650,6 +653,8 @@ function sceneZero() {
 
 function sceneOne() {
   currentScene = 1;
+  d3.select("#leftSideBar").html("‹")
+    .attr("class", "sideBar")
 
   removeCategories();
 
@@ -754,6 +759,8 @@ function sceneThree() {
 
 function sceneFour() {
     currentScene = 4
+    d3.select("#rightSideBar").html("›")
+    .attr("class", "sideBar")
     d3.selectAll(".scene3").remove();
     Categories(4, [1]);
     HoursForCategory("Theft", 0);
@@ -775,6 +782,9 @@ function sceneFour() {
 
 function sceneFive() {
     currentScene = 5
+
+    d3.select("#rightSideBar").html("")
+    .attr("class", "sideBarNoHover")
     d3.selectAll(".scene4").remove();
     Hours();
     Categories();
