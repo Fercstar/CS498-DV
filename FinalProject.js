@@ -672,7 +672,7 @@ function sceneOne() {
   (width = parseInt(d3.select("#Hours").style("width"), 10)),
     (height = parseInt(d3.select("#Hours").style("height"), 10));
 
-  data = ["The highlighted hours (0 and 12) are likely", "higher than those around them due to estimated", "times being rounded to midnight and noon."]
+  data = ["The highlighted hours (0 and 12) are likely", "higher than those around them due to unknown", "times being set to midnight or noon."]
 
   d3.select("body").select("#Hours").selectAll(".scene1").data(data)
     .enter()

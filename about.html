@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container">
+        <h1>About the Visualization</h1>
+        <a href="index.html">Return to Visualization</a>
+
+        <h3>Data</h3>
+        <p>
+            The data used in the visualizations was taken from the Crime Data dataset at 
+            <a href="https://data.seattle.gov/Public-Safety/Crime-Data/4fs7-3vj5">
+            data.seattle.gov</a>. It was filtered to show only data from 2008 - 2017 and 
+            pre-aggregated using Tableau Prep.
+        </p>
+
+        <h3>Visualization Structure</h3>
+        <p>I used the martini glass hybrid structure. By scrolling through 
+            several pre-defined views, the user learns how to use the visualization 
+            works and is presented with some sample conclusions to help them analyze the 
+            view further.
+        </p>
+        <h3>Scenes</h3>
+        <p>
+            There are six scenes in the visualization. Most of the scenes show the user
+            how the visualization works. In the last scene, the user can select a category of 
+            crime or an hour in the day to see either the crimes committed in that hour or the 
+            times when particular categories of crime are committed.
+        </p>
+        <h3>Annotations</h3>
+        <p>
+            There are a few annotations throughout the visualization. The first one alerts 
+            the viewer to the spikes in the histogram at 0 and 12 that are likely caused 
+            by the time of occurance being estimated. The second and third annotations 
+            point show how different crimes are more likely to occur at different times 
+            of the day. Throughout the visualization the view can hover their mouse over 
+            the bars to get additional details on demand in the form of a tooltip.
+        </p>
+        <h3>Parameters</h3>
+        <p>
+            There are several parameters the user can interact with to control the state of the 
+            visualization. In the beginning slides, the only thing the user can do is move the 
+            visualization backward and forwards by using the arrows to the right and left of the 
+            charts. They can also view tooltips at all times.
+            <br/>
+            <br/>
+            On the last scene, the user can change the parameters of the visualization by clicking 
+            on any of the bars in the Hour Crime Occurred and Category of Crime bar charts.
+        </p>
+        <h3>Triggers</h3>
+        <p>
+            The parameters in the visualzations drive sereral triggers. When a user moves forward 
+            or backward therough the scenes of the visualization, the progress bar moves with the 
+            to show them where they are at. Additionaly, there are triggers to change bar colors 
+            based on user selections and scene changes.
+        </p>
+
+    </div>
+    
+</body>
+</html>
