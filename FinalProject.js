@@ -4,6 +4,8 @@ var border = "#e5dadb";
 
 var transitionDuration = 0;
 
+
+
 function setDuration(duration) {
   transitionDuration = duration;
 }
@@ -67,12 +69,41 @@ function Hours(col = 0, ind = [-1]) {
 
     var rects = canvas.selectAll(".hoursBars").data(data);
 
+    var div = d3.select(".tooltip")
+            .style("opacity", 0);
+
     rects
       .enter()
       .append("rect")
       .merge(rects)
-      .on("mouseover", mouseOverHour)
-      .on("mouseout", mouseOutHour)
+      .on("mouseover", function(d) {		
+        div.transition("TooltipIn")		
+            .duration(200)		
+            .style("opacity", .9);		
+        div.html("Hour: " +  d.Hour + "<br/>" + "Crimes: " + d.Count)	
+            .style("left", (d3.event.pageX + 10) + "px")		
+            .style("top", (d3.event.pageY - 50) + "px");
+            if (currentScene === lastScene) {
+              if (d.Hour != currentHour) {
+                d3.select(this).attr("fill", colors[1]);
+              }
+            }	
+        })
+      .on("mouseout", function(d) {
+          
+          div.style("opacity", 0);
+          if (currentScene === lastScene) {
+            if ("None" === currentHour) {
+              d3.select(this)
+                .attr("fill", colors[0])
+                .transition("mouseOutHourTransition");
+            }
+            if ((currentHour != d.Hour) & ("None" != currentHour)) {
+              d3.select(this)
+                .attr("fill", colors[5])
+                .transition("mouseOutHourTransition");
+            }
+          }}  )
       .on("click", hourClick)
       .transition("HoursTransition")
       .duration(transitionDuration)
@@ -195,7 +226,7 @@ function Categories(col = 2, ind = [-1]) {
     var margin = { top: 20, right: 10, bottom: 30, left: 10 },
       width = parseInt(d3.select("#Category").style("width"), 10),
       width = width - margin.right - margin.left,
-      height = 700;
+      height = 650;
 
     data.forEach(function(d) {
       d.Category = d.Category;
@@ -236,12 +267,40 @@ function Categories(col = 2, ind = [-1]) {
 
     var rects = canvas.selectAll("rect").data(data);
 
+    var div = d3.select(".tooltip")
+            .style("opacity", 0);
+
     rects
       .enter()
       .append("rect")
       .merge(rects)
-      .on("mouseover", mouseOverCategory)
-      .on("mouseout", mouseOutCategory)
+      .on("mouseover", function(d) {		
+        div.transition("TooltipIn")		
+            .duration(200)		
+            .style("opacity", .9);		
+        div.html("Category: " +  d.Category + "<br/>" + "Crimes: " + d.Count)	
+            .style("left", (d3.event.pageX + 10) + "px")		
+            .style("top", (d3.event.pageY - 50) + "px");
+            if (currentScene === lastScene) {
+              if (d.Category != currentCategory) {
+                d3.select(this).attr("fill", colors[3]);
+              }
+            }	
+        })
+      .on("mouseout", function(d) {
+          div.style("opacity", 0);
+          if (currentScene === lastScene) {
+            if ("None" === currentCategory) {
+              d3.select(this)
+                .attr("fill", colors[2])
+                .transition("mouseOutHourTransition");
+            }
+            if ((currentCategory != d.Category) & ("None" != currentCategory)) {
+              d3.select(this)
+                .attr("fill", colors[4])
+                .transition("mouseOutHourTransition");
+            }
+          }}  )
       .on("click", categoryClick)
       .attr("height", 25)
       .transition("CategoriesTransition")
@@ -329,12 +388,41 @@ function HoursForCategory(categoryFilter, col = 0) {
 
     var rects = canvas.selectAll(".hoursBars").data(data);
 
+    var div = d3.select(".tooltip")
+            .style("opacity", 0);
+
     rects
       .enter()
       .append("rect")
       .merge(rects)
-      .on("mouseover", mouseOverHour)
-      .on("mouseout", mouseOutHour)
+      .on("mouseover", function(d) {		
+        div.transition("TooltipIn")		
+            .duration(200)		
+            .style("opacity", .9);		
+        div.html("Hour: " +  d.Hour + "<br/>" + "Crimes: " + d.Count)	
+            .style("left", (d3.event.pageX + 10) + "px")		
+            .style("top", (d3.event.pageY - 50) + "px");
+            if (currentScene === lastScene) {
+              if (d.Hour != currentHour) {
+                d3.select(this).attr("fill", colors[1]);
+              }
+            }	
+        })
+      .on("mouseout", function(d) {
+          
+          div.style("opacity", 0);
+          if (currentScene === lastScene) {
+            if ("None" === currentHour) {
+              d3.select(this)
+                .attr("fill", colors[0])
+                .transition("mouseOutHourTransition");
+            }
+            if ((currentHour != d.Hour) & ("None" != currentHour)) {
+              d3.select(this)
+                .attr("fill", colors[5])
+                .transition("mouseOutHourTransition");
+            }
+          }}  )
       .on("click", hourClick)
       .transition("HoursTransition")
       .duration(transitionDuration)
@@ -367,7 +455,7 @@ function CategoryForHours(hourFilter, col = 2) {
     var margin = { top: 20, right: 10, bottom: 30, left: 10 },
       width = parseInt(d3.select("#Category").style("width"), 10),
       width = width - margin.right - margin.left,
-      height = 700;
+      height = 650;
 
     data.forEach(function(d) {
       d.Hour = +d.Hour;
@@ -412,12 +500,40 @@ function CategoryForHours(hourFilter, col = 2) {
 
     var rects = canvas.selectAll("rect").data(data);
 
+    var div = d3.select(".tooltip")
+            .style("opacity", 0);
+
     rects
       .enter()
       .append("rect")
       .merge(rects)
-      .on("mouseover", mouseOverCategory)
-      .on("mouseout", mouseOutCategory)
+      .on("mouseover", function(d) {		
+        div.transition("TooltipIn")		
+            .duration(200)		
+            .style("opacity", .9);		
+        div.html("Category: " +  d.Category + "<br/>" + "Crimes: " + d.Count)	
+            .style("left", (d3.event.pageX + 10) + "px")		
+            .style("top", (d3.event.pageY - 50) + "px");
+            if (currentScene === lastScene) {
+              if (d.Category != currentCategory) {
+                d3.select(this).attr("fill", colors[3]);
+              }
+            }	
+        })
+      .on("mouseout", function(d) {
+          div.style("opacity", 0);
+          if (currentScene === lastScene) {
+            if ("None" === currentCategory) {
+              d3.select(this)
+                .attr("fill", colors[2])
+                .transition("mouseOutHourTransition");
+            }
+            if ((currentCategory != d.Category) & ("None" != currentCategory)) {
+              d3.select(this)
+                .attr("fill", colors[4])
+                .transition("mouseOutHourTransition");
+            }
+          }}  )
       .on("click", categoryClick)
       .transition("HoursForCategoryTransition")
       .duration(transitionDuration)
